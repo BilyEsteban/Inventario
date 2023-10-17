@@ -38,7 +38,7 @@ namespace Odontogest.Controllers
 
             if(id == null)
             {
-                return View();
+                return View( new Category());
             }
             else
             {
@@ -97,7 +97,8 @@ namespace Odontogest.Controllers
                 }
                 return RedirectToAction(nameof(ListCategory));
             }
-            return View(category);
+            //return View(category);
+            return Json(new { Isvale = false, html = Helper.RenderRazorViewToString(this, "CreateCategory", category)});
             
         }
 

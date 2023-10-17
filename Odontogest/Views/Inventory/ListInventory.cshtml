@@ -167,16 +167,24 @@
                 <nav class="sidebar-nav">
                     <ul id="side-menu">
                         <li>
-                            <a class="waves-effect" href="Myaccount.html" aria-expanded="false">
+                            <a class="waves-effect" asp-controller="Inventory" asp-action="ListInventory" aria-expanded="false">
                                 <i class=" icon-user-following fa-fw"></i> <span class="hide-menu">
-                                    Mi Cuenta
+                                    Inventario
                                 </span>
                             </a>
 
                         </li>
                         <li>
-                            <a class="waves-effect" href="Laboratorio.html" aria-expanded="false">
-                                <i class=" icon-chemistry  fa-fw"></i> <span class="hide-menu"> Laboratorio </span>
+                            <a class="waves-effect" asp-controller="Store" asp-action="ListStores" aria-expanded="false">
+                                <i class=" icon-chemistry  fa-fw"></i> <span class="hide-menu"> Store </span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a class="waves-effect" asp-controller="Category" asp-action="ListCategory" aria-expanded="false">
+                                <i class="  icon-note fa-fw"></i> <span class="hide-menu">
+                                    Category
+                                </span>
                             </a>
 
                         </li>
@@ -188,14 +196,6 @@
                                 <li> <a href="almacen.html">Almacen</a> </li>
                                 <li> <a href="proveedores.html">Proveedores</a> </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="tareas.html" aria-expanded="false">
-                                <i class="  icon-note fa-fw"></i> <span class="hide-menu">
-                                    Gestiond de Tareas
-                                </span>
-                            </a>
-
                         </li>
 
                         <li>
@@ -240,7 +240,7 @@
                             </ul>
 
                         <li>
-                            
+
                     </ul>
                 </nav>
 

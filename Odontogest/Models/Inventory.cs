@@ -43,7 +43,8 @@ namespace Odontogest.Models
         public DateTime? DateUpdate { get; set; }
 
         [Display(Name ="Imagen")]
-        public string Image { get; set; }   
+        public string Image { get; set; } 
+        
         [Display(Name ="Categoria")]
         public  Category? FkCategoryNavigation { get; set; }
         [Display(Name = "Almacen")]

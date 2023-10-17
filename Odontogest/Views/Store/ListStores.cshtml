@@ -166,35 +166,35 @@
                 <nav class="sidebar-nav">
                     <ul id="side-menu">
                         <li>
-                            <a class="waves-effect" href="Myaccount.html" aria-expanded="false">
+                            <a class="waves-effect" asp-controller="Inventory" asp-action="ListInventory" aria-expanded="false">
                                 <i class=" icon-user-following fa-fw"></i> <span class="hide-menu">
-                                    Mi Cuenta 2
+                                    Inventario
                                 </span>
                             </a>
 
                         </li>
                         <li>
-                            <a class="waves-effect" href="Laboratorio.html" aria-expanded="false">
-                                <i class=" icon-chemistry  fa-fw"></i> <span class="hide-menu"> Laboratorio </span>
+                            <a class="waves-effect" asp-controller="Store" asp-action="ListStores" aria-expanded="false">
+                                <i class=" icon-chemistry  fa-fw"></i> <span class="hide-menu"> Store </span>
                             </a>
 
                         </li>
                         <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class=" icon-tag fa-fw"></i> <span class="hide-menu"> Productos </span></a>
+                            <a class="waves-effect" asp-controller="Category" asp-action="ListCategory" aria-expanded="false">
+                                <i class="  icon-note fa-fw"></i> <span class="hide-menu">
+                                    Category
+                                </span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="#" aria-expanded="false"><i class=" icon-tag fa-fw"></i> <span class="hide-menu"> Productos </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li> <a href="inventario.html">Inventario</a> </li>
                                 <li> <a href="minventario.html">Movimiento Inventario</a> </li>
                                 <li> <a href="almacen.html">Almacen</a> </li>
                                 <li> <a href="proveedores.html">Proveedores</a> </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="tareas.html" aria-expanded="false">
-                                <i class="  icon-note fa-fw"></i> <span class="hide-menu">
-                                    Gestiond de Tareas
-                                </span>
-                            </a>
-
                         </li>
 
                         <li>
@@ -205,7 +205,7 @@
                         </li>
 
                         <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false">
+                            <a class="waves-effect" href="#" aria-expanded="false">
                                 <i class=" icon-support fa-fw"></i>
                                 <span class="hide-menu">Administración Odontogest</span>
                             </a>
@@ -224,7 +224,7 @@
 
                         <li>
                         <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false">
+                            <a class="waves-effect" href="#" aria-expanded="false">
                                 <i class="  icon-pie-chart fa-fw"></i>
                                 <span class="hide-menu">Reportes Odontogest</span>
                             </a>
@@ -240,7 +240,8 @@
 
                         <li>
 
-
+                    </ul>
+                </nav>
             </div>
         </aside>
         <!-- ===== Left-Sidebar-End ===== -->
@@ -269,7 +270,7 @@
                         </form>
                         <div class="white-box">
                             <div class="table-responsive">
-                                <table id="myTable" class="table table-striped">
+                                <table id="" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>
@@ -287,12 +288,15 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.State)
                                             </th>
-                                            <th></th>
+                                            <th>
+                                                <a onclick="Show('@Url.Action("CreateStore","Store", null, Context.Request.Scheme)','New Store')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Create</a>
+
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var item in Model)
-                                         {
+                                        {
                                             <tr>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.NameStore)
@@ -307,24 +311,25 @@
                                                     @Html.DisplayFor(modelItem => item.NewArticles)
                                                 </td>
                                                 <td>
-                                                   @Html.DisplayFor(modelItem => item.State)
+                                                    @Html.DisplayFor(modelItem => item.State)
                                                 </td>
                                                 <td>
+                                                    <a onclick="Show('@Url.Action("CreateStore","Store", new {id=item.IdStore}, Context.Request.Scheme)','Update Store')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
 
-                                                    <button class="btn btn-outline-warning" data-toggle="modal" data-target="@("#EditOrCreate"+item.IdStore)" asp-action="CreateStore" asp-route-idstore="@item.IdStore" ><i class="icon-share-alt"></i></button> |
-                                                    @await Html.PartialAsync("_EditOrCreatePartialView", item) 
+                                                    @*<button class="btn btn-outline-warning" data-toggle="modal" data-target="@("#EditOrCreate"+item.IdStore)" asp-action="CreateStore" asp-route-idstore="@item.IdStore"><i class="icon-share-alt"></i></button> |
+                                                @await Html.PartialAsync("_EditOrCreatePartialView", item)*@
                                                     @*<a asp-action="Details" asp-route-id="@item.IdStore">Details</a> |*@
                                                     <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.IdStore" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-times"></i></a>
                                                     @*<form method="post">
-                                                <button asp-page-handler="Delete" asp-route-id="@item.IdStore" class="btn btn-outline-danger"
-                                                        onclick="return confirm('Esta seguro que desea Eliminar este Registro?')">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </form>*@
+                                                    <button asp-page-handler="Delete" asp-route-id="@item.IdStore" class="btn btn-outline-danger"
+                                                            onclick="return confirm('Esta seguro que desea Eliminar este Registro?')">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>*@
 
                                                 </td>
                                             </tr>
-                                         }
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -332,112 +337,128 @@
                     </div>
                 </div>
                 <!-- ===== Right-Sidebar-End ===== -->
-                
-        <!-- ===== Page-Content-End ===== -->
-    </div>
-    <!-- ===== Main-Wrapper-End ===== -->
-    <!-- ==============================
+                <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Page-Content-End ===== -->
+            </div>
+            <!-- ===== Main-Wrapper-End ===== -->
+            <!-- ==============================
         Required JS Files
     =============================== -->
-    <!-- ===== jQuery ===== -->
-    <script src="~/plugins/components/jquery/dist/jquery.min.js"></script>
-    <!-- ===== Bootstrap JavaScript ===== -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- ===== Slimscroll JavaScript ===== -->
-    <script src="~/js/jquery.slimscroll.js"></script>
-    <!-- ===== Wave Effects JavaScript ===== -->
-    <script src="~/js/waves.js"></script>
-    <!-- ===== Menu Plugin JavaScript ===== -->
-    <script src="~/js/sidebarmenu.js"></script>
-    <!-- ===== Custom JavaScript ===== -->
-    <script src="~/js/custom.js"></script>
-    <script src="~/plugins/components/datatables/jquery.dataTables.min.js"></script>
-    <!-- start - This is for export functionality only -->
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+            <!-- ===== jQuery ===== -->
+            <script src="~/plugins/components/jquery/dist/jquery.min.js"></script>
+            <!-- ===== Bootstrap JavaScript ===== -->
+            <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- ===== Slimscroll JavaScript ===== -->
+            <script src="~/js/jquery.slimscroll.js"></script>
+            <!-- ===== Wave Effects JavaScript ===== -->
+            <script src="~/js/waves.js"></script>
+            <!-- ===== Menu Plugin JavaScript ===== -->
+            <script src="~/js/sidebarmenu.js"></script>
+            <!-- ===== Custom JavaScript ===== -->
+            <script src="~/js/custom.js"></script>
+            <script src="~/plugins/components/datatables/jquery.dataTables.min.js"></script>
+            <!-- start - This is for export functionality only -->
+            <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+            <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+            <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
-    <!-- end - This is for export functionality only -->
-    <!-- ===== Plugin JS ===== -->
-    <script src="~/plugins/components/chartist-js/dist/chartist.min.js"></script>
-    <script src="~/plugins/components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="~/plugins/components/sparkline/jquery.sparkline.min.js"></script>
-    <script src="~/plugins/components/sparkline/jquery.charts-sparkline.js"></script>
-    <script src="~/plugins/components/knob/jquery.knob.js"></script>
-    <script src="~/plugins/components/easypiechart/dist/jquery.easypiechart.min.js"></script>
-    <script src="~/js/db1.js"></script>
-    <script src="~/plugins/components/dropify/dist/js/dropify.min.js"></script>
-    <!-- ===== Style Switcher JS ===== -->
-    <script src="~/plugins/components/styleswitcher/jQuery.style.switcher.js"></script>
+            <!-- end - This is for export functionality only -->
+            <!-- ===== Plugin JS ===== -->
+            <script src="~/plugins/components/chartist-js/dist/chartist.min.js"></script>
+            <script src="~/plugins/components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+            <script src="~/plugins/components/sparkline/jquery.sparkline.min.js"></script>
+            <script src="~/plugins/components/sparkline/jquery.charts-sparkline.js"></script>
+            <script src="~/plugins/components/knob/jquery.knob.js"></script>
+            <script src="~/plugins/components/easypiechart/dist/jquery.easypiechart.min.js"></script>
+            <script src="~/js/db1.js"></script>
+            <script src="~/js/site.js"></script>
+            <script src="~/plugins/components/dropify/dist/js/dropify.min.js"></script>
+            <!-- ===== Style Switcher JS ===== -->
+            <script src="~/plugins/components/styleswitcher/jQuery.style.switcher.js"></script>
 
-    <script>
-        $(function () {
-            $('#myTable').DataTable();
+            <script>
+                $(function () {
+                    $('#myTable').DataTable();
 
-            var table = $('#example').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
-                "order": [
-                    [2, 'asc']
-                ],
-                "displayLength": 25,
-                "drawCallback": function (settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                        page: 'current'
-                    }).data().each(function (group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                            last = group;
+                    var table = $('#example').DataTable({
+                        "columnDefs": [{
+                            "visible": false,
+                            "targets": 2
+                        }],
+                        "order": [
+                            [2, 'asc']
+                        ],
+                        "displayLength": 25,
+                        "drawCallback": function (settings) {
+                            var api = this.api();
+                            var rows = api.rows({
+                                page: 'current'
+                            }).nodes();
+                            var last = null;
+                            api.column(2, {
+                                page: 'current'
+                            }).data().each(function (group, i) {
+                                if (last !== group) {
+                                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                    last = group;
+                                }
+                            });
                         }
                     });
-                }
-            });
 
-            // Basic
-            $('.dropify').dropify();
-            // Translated
-            $('.dropify-es').dropify({
-                messages: {
-                    default: 'Arrastra y suelta un archivo aquí o haz clic',
-                    replace: 'Arrastre y suelte un archivo o haga clic para reemplazar',
-                    remove: 'Eliminar',
-                    error: 'Lo sentimos, el archivo es demasiado grande'
-                }
-            });
-            // Used events
-            var drEvent = $('#input-file-events').dropify();
-            drEvent.on('dropify.beforeClear', function (event, element) {
-                return confirm("Realmente desea eliminar la imagen \"" + element.file.name + "\" ?");
-            });
-            drEvent.on('dropify.afterClear', function (event, element) {
-                alert('Imagen eliminada');
-            });
-            drEvent.on('dropify.errors', function (event, element) {
-                console.log('Has Errors');
-            });
-            var drDestroy = $('#input-file-to-destroy').dropify();
-            drDestroy = drDestroy.data('dropify')
-            $('#toggleDropify').on('click', function (e) {
-                e.preventDefault();
-                if (drDestroy.isDropified()) {
-                    drDestroy.destroy();
-                } else {
-                    drDestroy.init();
-                }
-            })
-        });
-    </script>
+                    // Basic
+                    $('.dropify').dropify();
+                    // Translated
+                    $('.dropify-es').dropify({
+                        messages: {
+                            default: 'Arrastra y suelta un archivo aquí o haz clic',
+                            replace: 'Arrastre y suelte un archivo o haga clic para reemplazar',
+                            remove: 'Eliminar',
+                            error: 'Lo sentimos, el archivo es demasiado grande'
+                        }
+                    });
+                    // Used events
+                    var drEvent = $('#input-file-events').dropify();
+                    drEvent.on('dropify.beforeClear', function (event, element) {
+                        return confirm("Realmente desea eliminar la imagen \"" + element.file.name + "\" ?");
+                    });
+                    drEvent.on('dropify.afterClear', function (event, element) {
+                        alert('Imagen eliminada');
+                    });
+                    drEvent.on('dropify.errors', function (event, element) {
+                        console.log('Has Errors');
+                    });
+                    var drDestroy = $('#input-file-to-destroy').dropify();
+                    drDestroy = drDestroy.data('dropify')
+                    $('#toggleDropify').on('click', function (e) {
+                        e.preventDefault();
+                        if (drDestroy.isDropified()) {
+                            drDestroy.destroy();
+                        } else {
+                            drDestroy.init();
+                        }
+                    })
+                });
+            </script>
 </body>
 
 </html>

@@ -4,13 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Odontogest.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Helpers;
 
 namespace Odontogest.Controllers
 {
@@ -54,11 +51,12 @@ namespace Odontogest.Controllers
         }
 
         
+        public Inventory listInven = new Inventory();
 
         // GET: Inventory
         public ActionResult ListInventory()
         {
-            var listInven = new Inventory();
+           
             drownStore(listInven.FkStore);
             drownCategori(listInven.FkCategory);
 
@@ -92,7 +90,8 @@ namespace Odontogest.Controllers
         {
             ViewBag.PageName = id == null ? "Add Inventory" : "Edit Inventory";
             ViewBag.isExit = id == null ? false : true;
-            var listInven = new Inventory();
+
+            //var listInven = new Inventory();
 
             if (id == null)
             {
@@ -307,48 +306,3 @@ namespace Odontogest.Controllers
                
     }
 }
-
-
-//inventories.NameInventory = inventory.NameInventory;
-//inventories.FkCategory = inventory.FkCategory;
-//inventories.FkStore = inventory.FkStore;
-//inventories.Price = inventory.Price;
-//inventories.Quantity = inventory.Quantity;
-//inventories.QuantityAvailable = inventory.QuantityAvailable;
-//inventories.Description = inventory.Description;
-//inventories.Image = inventory.Image;
-
-//if (await TryUpdateModelAsync<Inventory>(inventories, "",
-//               i => i.NameInventory,
-//               i => i.FkCategory,
-//               i => i.FkStore,
-//               i => i.Price,
-//               i => i.Quantity,
-//               i => i.Description,
-//               i => i.Image))
-//{
-//    try
-//    {
-//        if (Exits)
-//        {
-//            _context.Update(inventories);
-//        }
-//        else
-//        {
-//            _context.Add(inventories);
-//        }
-
-//        _context.SaveChanges();
-
-//    }
-//    catch (DbUpdateException)
-//    {
-//        return View();
-//    }
-
-//    return RedirectToAction(nameof(ListInventory));
-//}
-
-//drownStore(inventories.FkStore);
-//drownCategori(inventories.FkCategory);
-//return View(inventories);

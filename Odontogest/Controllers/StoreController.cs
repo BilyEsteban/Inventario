@@ -76,12 +76,12 @@ namespace Odontogest.Controllers
         // POST: Store/CreateStore
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateStore(int idstore,[Bind("IdStore,NameStore,Location,QuantityArticles,NewArticles,State")] 
+        public ActionResult CreateStore(int id,[Bind("IdStore,NameStore,Location,QuantityArticles,NewArticles,State")] 
                 Store stores )
         {
             bool ExitStore = false;
 
-            Store store1 = _context.Stores.Find(idstore);
+            Store store1 = _context.Stores.Find(id);
 
             if(store1 != null)
             {
@@ -123,8 +123,8 @@ namespace Odontogest.Controllers
                 return RedirectToAction(nameof(ListStores));
 
             }
-
-            return View(stores);
+            return Json(new { Isvale = false, html = Helper.RenderRazorViewToString(this, "CreateStore", stores) });
+            //return View(stores);
         }
 
 
